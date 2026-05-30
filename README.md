@@ -10,21 +10,21 @@ Implementación funcional en Common Lisp de un sistema de control de tráfico ur
 
 | Nombre | Usuario GitHub |
 |--------|----------------|
-| [Romero Agustin Ezequiel] | [appsgustin] |
-| [Salguero Benjamin] | [usuario2] |
-| [Roa Gabriel Alan] | [usuario3] |
-| [Retamoso Lisandro] | [usuario4] |
+| Romero Agustin Ezequiel | appsgustin |
+| Salguero Benjamin | usuario2 |
+| Roa Gabriel Alan | usuario3 |
+| Retamoso Lisandro | usuario4 |
 
 ## 📁 Estructura del repositorio
-TPI-Funcional-2026-Grupo47/
-├── lisp/
-│ ├── core.lisp # Código Requerimientos 1 a 6 + extensiones
-│ └── config.json # Configuración de tiempos (si aplica)
-├── comparativa/
-│ └── solucion.[ext] # Código en [lenguaje asignado]
-├── docs/
-│ ├── INFORME.pdf # Informe técnico analítico
-│ └── HONOR.md # Declaración de código de honor
+TPI-Funcional-2026-Grupo47/ <br>
+├── lisp/ <br>
+│ ├── core.lisp # Código Requerimientos 1 a 6 + extensiones <br>
+│ └── config.json # Configuración de tiempos (si aplica) <br>
+├── comparativa/ <br>
+│ └── solucion.scm # Código en SCHEME <br>
+├── docs/ <br>
+│ ├── INFORME.pdf # Informe técnico analítico <br>
+│ └── HONOR.md # Declaración de código de honor <br>
 └── README.md
 ## ⚙️ Requisitos previos
 
