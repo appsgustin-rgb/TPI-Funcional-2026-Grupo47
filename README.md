@@ -16,6 +16,7 @@ Implementación funcional en Common Lisp de un sistema de control de tráfico ur
 | Retamoso Lisandro | usuario4 |
 
 ## 📁 Estructura del repositorio
+``` bash
 TPI-Funcional-2026-Grupo47/ <br>
 ├── lisp/ <br>
 │ ├── core.lisp # Código Requerimientos 1 a 6 + extensiones <br>
@@ -26,6 +27,7 @@ TPI-Funcional-2026-Grupo47/ <br>
 │ ├── INFORME.pdf # Informe técnico analítico <br>
 │ └── HONOR.md # Declaración de código de honor <br>
 └── README.md
+```
 ## ⚙️ Requisitos previos
 
 - Common Lisp
