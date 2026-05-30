@@ -10,9 +10,9 @@ Retamoso Lisandro
 ## 🎯 Contexto y objetivo
 **Problema a resolver**: Desarrollar el nucleo de un sistema embebido que controla semaforos.
 **Objetivos** <br>
-Desarrollar una aplicacion por consola que:
--Por temporizador, realize transiciones entre colores para simular un semaforo urbano.
--Imprima por terminal estas transiciones y las almacene persistentemente.
+Desarrollar una aplicacion por consola que: <br>
+-Por temporizador, realize transiciones entre colores para simular un semaforo urbano. <br>
+-Imprima por terminal estas transiciones y las almacene persistentemente. <br>
 -Analize cambios por ciclos de transiciones de colores.
 
 
