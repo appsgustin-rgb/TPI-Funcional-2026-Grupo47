@@ -70,7 +70,7 @@ R6 – Distribución porcentual por hora
 
 Extensión 1 – Intermitencia de seguridad (3s)
 
-Extensión 2 – Persistencia de log en archivo
+Extensión 2 – Persistencia de loggin en archivo
 
 Fase 2 – Quicklisp + [local-time / cl-json]
 
