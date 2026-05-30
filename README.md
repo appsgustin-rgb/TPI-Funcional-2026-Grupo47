@@ -17,15 +17,15 @@ Implementación funcional en Common Lisp de un sistema de control de tráfico ur
 
 ## 📁 Estructura del repositorio
 ``` bash
-TPI-Funcional-2026-Grupo47/ <br>
-├── lisp/ <br>
-│ ├── core.lisp # Código Requerimientos 1 a 6 + extensiones <br>
-│ └── config.json # Configuración de tiempos (si aplica) <br>
-├── comparativa/ <br>
-│ └── solucion.scm # Código en SCHEME <br>
-├── docs/ <br>
-│ ├── INFORME.pdf # Informe técnico analítico <br>
-│ └── HONOR.md # Declaración de código de honor <br>
+TPI-Funcional-2026-Grupo47/
+├── lisp/
+│ ├── core.lisp # Código Requerimientos 1 a 6 + extensiones
+│ └── config.json # Configuración de tiempos (si aplica)
+├── comparativa/
+│ └── solucion.scm # Código en SCHEME
+├── docs/ 
+│ ├── INFORME.pdf # Informe técnico analítico
+│ └── HONOR.md # Declaración de código de honor
 └── README.md
 ```
 ## ⚙️ Requisitos previos
