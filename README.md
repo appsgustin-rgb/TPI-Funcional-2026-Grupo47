@@ -42,20 +42,20 @@ sbcl --load lisp/core.lisp
 (transicion 'en-rojo 'verde)
 (timer 1728000000)
 ```
-🎥 Video de defensa
+## 🎥 Video de defensa
 🚧En proceso🚧
 
-📄 Documentación
+## 📄 Documentación
 Informe técnico completo: docs/INFORME.pdf
 
 Declaración de honor: docs/HONOR.md
 
-🧪 Lenguaje asignado (Fase 3)
+## 🧪 Lenguaje asignado (Fase 3)
 Lenguaje: Scheme
 
 Las funciones transicion y timer fueron reimplementadas en este lenguaje dentro de la carpeta /comparativa.
 
-✅ Requerimientos cumplidos
+## ✅ Requerimientos cumplidos
 R1 – Transición de estados
 
 R2 – Temporizador automático (Unix timestamp)
