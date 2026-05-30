@@ -1,9 +1,9 @@
 Integrante 2: [benjamin salguero] - Usuario GitHub: [benjagonza0]
-1. Código en Common Lisp (Fase 1 y 2)
+1. Código en Common Lisp (Fase 1 y 2) <br>
 [ ] Desarrollo 100% Humano: El código fue diseñado, escrito y depurado puramente por mí/el grupo sin intervención de IA. <br>
 [x ] Asistencia de IA (Co-piloto): Utilicé IA como un tutor o documentación dinámica (búsqueda de errores sintácticos, explicación de funciones primitivas), pero la lógica y clasificación del semáforo fue estructurada por el grupo. <br>
 [ ] Generación Completa por IA: Un modelo de IA generó bloques enteros o la totalidad de las funciones principales a partir del enunciado base.<br>
-3. Código del Lenguaje Asignado (Fase 3)
+3. Código del Lenguaje Asignado (Fase 3) <br>
 [ ] Desarrollo 100% Humano: Aprendí la sintaxis básica, clasifiqué sus componentes y escribí la solución de forma autónoma.<br>
 [x] Asistencia de IA: Utilicé la IA para traducir la sintaxis de Lisp al nuevo lenguaje o entender los errores del compilador ajeno.<br>
 [ ] Generación Completa por IA: La IA realizó la traducción automática de las funciones transicion y timer.<br>
