@@ -78,7 +78,7 @@ Fase 2 – Quicklisp + [local-time / cl-json]
 
 Fase 3 – Implementación en Scheme
 
-## 🔍 Notas para el corrector
+### 🔍 Notas para el corrector
 El código cumple con inmutabilidad absoluta (sin setq/setf/defparameter).
 
 No se utilizan bucles imperativos (loop, dolist); se emplea recursividad de cola y funciones de orden superior.
@@ -89,7 +89,7 @@ La bitácora de depuración con al menos 4 errores documentados está en docs/IN
 
 El historial de commits es incremental y cada integrante realizó contribuciones desde su propia cuenta.
 
-## 📅 Fecha de entrega
+### 📅 Fecha de entrega
 Martes 16 de Junio
 
 ## Universidad Nacional del Nordeste / Paradigmas y lenguajes - 2026
