@@ -4,7 +4,7 @@
 
 ## 📌 Descripción
 
-Implementación funcional en Common Lisp de un sistema de control de tráfico urbano con semáforos inteligentes. Incluye lógica de transiciones, temporización, auditoría, análisis de ciclos, planificación temporal, distribución porcentual y extensiones de seguridad y persistencia. Como parte del trabajo, se reimplementaron las funciones principales en [Lenguaje Asignado] para el análisis comparativo de paradigmas.
+Implementación funcional en Common Lisp de un sistema de control de tráfico urbano con semáforos inteligentes. Incluye lógica de transiciones, temporización, auditoría, análisis de ciclos, planificación temporal, distribución porcentual y extensiones de seguridad y persistencia. Como parte del trabajo, se reimplementaron las funciones principales en scheme para el análisis comparativo de paradigmas.
 
 ## 👥 Integrantes
 
