@@ -48,29 +48,25 @@ Requerimiento 3: Sistema de Auditoría
         ((equalp colorActual 'rojo) (format t "~Tiempo ~a: la luz a cambiado de amarillo a rojo" timestampActual))
         ((equalp colorActual 'verde) (format t "~Tiempo ~a: la luz a cambiado de rojo a verde" timestampActual))
         ((equalp colorActual 'amarillo) (format t "~Tiempo ~a: la luz a cambiado de verde a amarillo" timestampActual))
-        (t nil)
-        )
-    )
+        (t nil)))
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
  (defun duracionCiclo (segVerde segAmarillo segRojo) ;requerimiento 4.a
     (cond
         ((and (numberp segVerde) (numberp segAmarillo) (numberp segRojo)) (+ segVerde segAmarillo segRojo))
-        (t nil)
-        )
-    )
+        (t nil)))
+
 (defun recomendacionCiclo (ciclo) ;requerimiento 4.b
     (cond 
         ((null ciclo) "Error: El parámetro debe ser un número")
          ((and (< ciclo 150) (> ciclo 35)) "Duracion OPTIMA")
          ((< ciclo 35) "Duracion NO OPTIMA aumentar duracion del ciclo")
-         (t "Duracion NO OPTIMA reducir duracion del ciclo")
-        )
-    )
+         (t "Duracion NO OPTIMA reducir duracion del ciclo")))
 
 (defun ciclosPorTiempo (minutos)       ;requerimient0 5
-    (format nil "Cantidad de ciclos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216)))
-    )
+    (cond 
+        ((and (numberp minutos) (> minutos 0)) (format t "Cantidad de ciclos completos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216))))
+        (t "Error: El parámetro debe ser un número positivo")))
 
 (defun distribucionTemp ()     ;requerimiento 6
-    (format nil "verde: %~a, amarillo: %~a, rojo: %~a." (* (/ (* 120 16.6) 3600) 100) (* (/ (* 6 16.6) 3600) 100) (* (/ (* 90 16.6) 3600) 100))
-    )
+    (format nil "verde: %~a, amarillo: %~a, rojo: %~a." (* (/ (* 120 16.6) 3600) 100) (* (/ (* 6 16.6) 3600) 100) (* (/ (* 90 16.6) 3600) 100)))
