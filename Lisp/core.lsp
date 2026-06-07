@@ -47,12 +47,11 @@ Requerimiento 3: Sistema de Auditoría
 ;; ESTRATEGIA: Función condicional (utiliza un cond para evaluar el color de destino mediante comparaciones con equalp)
 ;; IMPACTO: No destructiva (no altera ni modifica los símbolos o valores recibidos por los argumentos)
 ;; ===========================================================
-(defun auditoria (colorActual timestampActual)
+(defun auditoria (colorActual timestampActual)      ;requerimiento 3
     (cond
-        ((equalp colorActual 'rojo) (format t "~Tiempo ~a: la luz a cambiado de amarillo a rojo" timestampActual))
-        ((equalp colorActual 'verde) (format t "~Tiempo ~a: la luz a cambiado de rojo a verde" timestampActual))
-        ((equalp colorActual 'amarillo) (format t "~Tiempo ~a: la luz a cambiado de verde a amarillo" timestampActual))
-        (t nil)))
+        ((equalp colorActual 'rojo) (format nil "~Tiempo ~a: la luz a cambiado de amarillo a rojo" timestampActual))
+        ((equalp colorActual 'verde) (format nil "~Tiempo ~a: la luz a cambiado de rojo a verde" timestampActual))
+        (t (format nil "~Tiempo ~a: la luz a cambiado de verde a amarillo" timestampActual))))
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;; ========================================================
