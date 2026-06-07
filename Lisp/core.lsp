@@ -18,9 +18,11 @@ Requerimiento 2: Temporizador Automático
 ;; ESTRATEGIA: Posicion del timer dentro del intervalo de ciclo
 ;; IMPACTO: No destructiva (no modifica las variables originales)
 ;; ========================================================
-(defun posEnCiclo (momentoInicio momentoActual)                  
-        (mod (- momentoActual momentoInicio) 216) 
-    )
+(defun posEnCiclo (primerTimestamp timestampActual)                  
+      (IF (AND (numberp primerTimestamp) (numberp timestampActual))
+		(mod (- timestampActual primerTimestamp) 216)
+		"Los datos ingresados son invalidos"))
+
 ;; ========================================================
 ;; FUNCIÓN: timer
 ;; NATURALEZA: Pura (recibe valores numeros y devuelve el mismo tipo)
