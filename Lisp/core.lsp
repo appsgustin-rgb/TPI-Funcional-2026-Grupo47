@@ -15,11 +15,11 @@ Requerimiento 2: Temporizador Automático
 ;; ========================================================
 ;; FUNCIÓN: posEnCiclo ;; Auxiliar
 ;; NATURALEZA: Pura (recibe valores numeros y devuelve el mismo tipo)
-;; ESTRATEGIA: 
+;; ESTRATEGIA: Posicion del timer dentro del intervalo de ciclo
 ;; IMPACTO: No destructiva (no modifica las variables originales)
 ;; ========================================================
-(defun posEnCiclo (momentoInicio momentoActual)        ;funcion auxiliar para calcular la posicion en el ciclo de luces          
-        (mod (- momentoActual momentoInicio) 216)      ;siempre da entre 0 y 215, que es la duracion total del ciclo de luces
+(defun posEnCiclo (momentoInicio momentoActual)                  
+        (mod (- momentoActual momentoInicio) 216) 
     )
 ;; ========================================================
 ;; FUNCIÓN: timer
