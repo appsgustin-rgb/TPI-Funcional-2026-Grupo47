@@ -10,18 +10,29 @@ Requerimiento 1: Estados de Transición
 	      ( (eq cambiar-a 'rojo)     (list color-actual "cambiar-a-rojo"))
 	      ( (eq cambiar-a 'amarillo) (list color-actual "cambiar-a-amarillo"))
 	      (t (list color-actual 'accion-por-defecto))))
-
+----------------------------------------------------------------------------------------------------------------------------------
+Requerimiento 2: Temporizador Automático
+;; ========================================================
+;; FUNCIÓN: posEnCiclo ;; Auxiliar
+;; NATURALEZA: Pura (recibe valores numeros y devuelve el mismo tipo)
+;; ESTRATEGIA: 
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ========================================================
 (defun posEnCiclo (momentoInicio momentoActual)        ;funcion auxiliar para calcular la posicion en el ciclo de luces          
-        (mod (- momentoActual momentoInicio) 216)      ;siempre da entre 1 y 216, que es la duracion total del ciclo de luces
+        (mod (- momentoActual momentoInicio) 216)      ;siempre da entre 0 y 215, que es la duracion total del ciclo de luces
     )
-(defun timer (primerTimestamp timestampActual) ;requerimiento 2
-    (cond
-        ((< (posEnCiclo primerTimestamp timestampActual) 90) 'rojo)   ;segun sea la posicion en el ciclo, se determina el color actual de la luz
-        ((< (posEnCiclo primerTimestamp timestampActual) 210) 'verde)
-        (t 'amarillo)
-        )
-    )
-
+;; ========================================================
+;; FUNCIÓN: timer
+;; NATURALEZA: Pura (recibe valores numeros y devuelve el mismo tipo)
+;; ESTRATEGIA: Funcion condicional (Segun sea la posicion en el ciclo, se determina el color actual de la luz)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ========================================================
+(defun timer (primerTimestamp timestampActual)
+  (let ((pos (posEnCiclo primerTimestamp timestampActual)))
+    (cond ((< pos 90)  'rojo)      ; De 0 a 89 (90 segundos)
+          ((< pos 96)  'amarillo)  ; De 90 a 95 (6 segundos)
+          (t           'verde))))  ; De 96 a 215 (120 segundos)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
 (defun auditoria (colorActual timestampActual)      ;requerimiento 3
     (cond
         ((equalp colorActual 'rojo) (format t "~Tiempo ~a: la luz a cambiado de amarillo a rojo" timestampActual))
