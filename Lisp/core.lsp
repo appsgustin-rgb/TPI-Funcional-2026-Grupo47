@@ -54,7 +54,13 @@ Requerimiento 3: Sistema de Auditoría
         (t nil)))
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
- (defun duracionCiclo (segVerde segAmarillo segRojo) ;requerimiento 4.a
+;; ========================================================
+;; FUNCIÓN: duracionCiclo
+;; NATURALEZA: Pura (recibe valores numeros, realiza un calculo aritmetico y devuelve el resultado)
+;; ESTRATEGIA: Funcion condicional (Segun sea el tipo de dato recibido, se valida y realiza una operacion aritmetica)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ======================================================== 
+(defun duracionCiclo (segVerde segAmarillo segRojo) ;requerimiento 4.a
     (cond
         ((and (numberp segVerde) (numberp segAmarillo) (numberp segRojo)) (+ segVerde segAmarillo segRojo))
         (t nil)))
