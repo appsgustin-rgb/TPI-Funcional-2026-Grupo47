@@ -65,6 +65,12 @@ Requerimiento 3: Sistema de Auditoría
         ((and (numberp segVerde) (numberp segAmarillo) (numberp segRojo)) (+ segVerde segAmarillo segRojo))
         (t nil)))
 
+;; ========================================================
+;; FUNCIÓN: recomendacionCiclo
+;; NATURALEZA: Pura (recibe un valor de duracion de ciclo y retorna una cadena de texto evaluando las condiciones)
+;; ESTRATEGIA: Funcion condicional (Evalua el rango numérico del ciclo para sugerir optimizaciones)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ========================================================
 (defun recomendacionCiclo (ciclo) ;requerimiento 4.b
     (cond 
         ((null ciclo) "Error: El parámetro debe ser un número")
@@ -72,10 +78,22 @@ Requerimiento 3: Sistema de Auditoría
          ((< ciclo 35) "Duracion NO OPTIMA aumentar duracion del ciclo")
          (t "Duracion NO OPTIMA reducir duracion del ciclo")))
 
+;; ========================================================
+;; FUNCIÓN: ciclosPorTiempo
+;; NATURALEZA: Pura (recibe un valor de tiempo en minutos y calcula la cantidad de ciclos enteros)
+;; ESTRATEGIA: Funcion aritmetica (Aplica division y truncamiento para retornar una cadena con format)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ========================================================
 (defun ciclosPorTiempo (minutos)       ;requerimient0 5
     (cond 
         ((and (numberp minutos) (> minutos 0)) (format nil "Cantidad de ciclos completos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216))))
         (t "Error: El parámetro debe ser un número positivo")))
 
+;; ========================================================
+;; FUNCIÓN: distribucionTemp
+;; NATURALEZA: Pura (realiza calculos porcentuales de distribucion de tiempo fijos y devuelve el formato)
+;; ESTRATEGIA: Funcion aritmetica (Calcula relaciones matematicas basadas en tiempos predeterminados)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ========================================================
 (defun distribucionTemp ()     ;requerimiento 6
     (format nil "verde: %~a, amarillo: %~a, rojo: %~a." (* (/ (* 120 16.6) 3600) 100) (* (/ (* 6 16.6) 3600) 100) (* (/ (* 90 16.6) 3600) 100)))
