@@ -21,9 +21,9 @@ Requerimiento 2: Temporizador Automático
 ;; ESTRATEGIA: Posicion del timer dentro del intervalo de ciclo
 ;; IMPACTO: No destructiva (no modifica las variables originales)
 ;; ========================================================
-(defun posEnCiclo (primerTimestamp timestampActual)                  
-      (IF (AND (numberp primerTimestamp) (numberp timestampActual))
-		(mod (- timestampActual primerTimestamp) 216)
+(defun posEnCiclo (timestampActual)                  
+      (IF (numberp timestampActual)              ;funcion auxiliar para calcular la posicion en el ciclo de 216 segundos
+		(mod (- timestampActual 1171810800) 216) ; 1171810800 es el timestamp del 18 de febrero de 2007 a las 12:00:00 PM GMT
 		nil))
 
 ;; ========================================================
@@ -32,12 +32,13 @@ Requerimiento 2: Temporizador Automático
 ;; ESTRATEGIA: Funcion condicional (Segun sea la posicion en el ciclo, se determina el color actual de la luz)
 ;; IMPACTO: No destructiva (no modifica las variables originales)
 ;; ========================================================
-(defun timer (primerTimestamp timestampActual)
-  (let ((pos (posEnCiclo primerTimestamp timestampActual)))
+(defun timer (timestampActual)  ;requerimiento 2
+  (let ((pos (posEnCiclo timestampActual)))
     (cond ((nil pos) "error: solo numeros")
 		  ((< pos 90)  'rojo)      ; De 0 a 89 (90 segundos)
           ((< pos 96)  'amarillo)  ; De 90 a 95 (6 segundos)
-          (t           'verde))))  ; De 96 a 215 (120 segundos)
+          (t 'verde))))            ; De 96 a 215 (120 segundos)
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Requerimiento 3: Sistema de Auditoría
 ;; =========================================================
