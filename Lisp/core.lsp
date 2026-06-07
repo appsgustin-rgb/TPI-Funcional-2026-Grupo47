@@ -34,7 +34,7 @@ Requerimiento 2: Temporizador Automático
 ;; ========================================================
 (defun timer (timestampActual)  ;requerimiento 2
   (let ((pos (posEnCiclo timestampActual)))
-    (cond ((nil pos) "error: solo numeros")
+    (cond ((null pos) "error: solo numeros")
 		  ((< pos 90)  'rojo)      ; De 0 a 89 (90 segundos)
           ((< pos 96)  'amarillo)  ; De 90 a 95 (6 segundos)
           (t 'verde))))            ; De 96 a 215 (120 segundos)
