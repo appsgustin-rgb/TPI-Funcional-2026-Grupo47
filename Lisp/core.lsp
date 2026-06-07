@@ -67,8 +67,8 @@ Requerimiento 3: Sistema de Auditoría
         )
     )
 
-(defun ciclosPorTiempo (ciclo minutos)       ;requerimient0 5
-    (format t "Cantidad de ciclos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) ciclo)))
+(defun ciclosPorTiempo (minutos)       ;requerimient0 5
+    (format nil "Cantidad de ciclos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216)))
     )
 
 (defun distribucionTemp () ;requerimiento 6
