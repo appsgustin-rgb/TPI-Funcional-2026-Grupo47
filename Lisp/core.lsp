@@ -33,7 +33,14 @@ Requerimiento 2: Temporizador Automático
           ((< pos 96)  'amarillo)  ; De 90 a 95 (6 segundos)
           (t           'verde))))  ; De 96 a 215 (120 segundos)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-(defun auditoria (colorActual timestampActual)      ;requerimiento 3
+Requerimiento 3: Sistema de Auditoría
+;; =========================================================
+;; FUNCIÓN: auditoria 
+;; NATURALEZA: Pura (no produce efectos secundarios en la pantalla ya que construye y retorna una cadena de texto)
+;; ESTRATEGIA: Función condicional (utiliza un cond para evaluar el color de destino mediante comparaciones con equalp)
+;; IMPACTO: No destructiva (no altera ni modifica los símbolos o valores recibidos por los argumentos)
+;; ===========================================================
+(defun auditoria (colorActual timestampActual)
     (cond
         ((equalp colorActual 'rojo) (format t "~Tiempo ~a: la luz a cambiado de amarillo a rojo" timestampActual))
         ((equalp colorActual 'verde) (format t "~Tiempo ~a: la luz a cambiado de rojo a verde" timestampActual))
@@ -41,7 +48,7 @@ Requerimiento 2: Temporizador Automático
         (t nil)
         )
     )
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 (defun duracionCiclo (segVerde segAmarillo segRojo) ;requerimiento 4.a
     (cond
         (and (numberp segVerde) (numberp segAmarillo) (numberp segRojo)) (format t "Duración del ciclo: ~a segundos" (+ segVerde segAmarillo segRojo))
