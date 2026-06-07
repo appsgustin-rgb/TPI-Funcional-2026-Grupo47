@@ -5,11 +5,14 @@ Requerimiento 1: Estados de Transición
 ;; ESTRATEGIA: Funcion condicional (va a evaluar los valores de entrada según las condiciones establecidas)
 ;; IMPACTO: No destructiva (no modifica las variables originales)
 ;; ========================================================
-(defun transicion (color-actual cambiar-a)
-	(cond (	(eq cambiar-a 'verde)    (list color-actual "cambiar-a-verde"))
-	      ( (eq cambiar-a 'rojo)     (list color-actual "cambiar-a-rojo"))
-	      ( (eq cambiar-a 'amarillo) (list color-actual "cambiar-a-amarillo"))
-	      (t (list color-actual 'accion-por-defecto))))
+(defun transicion (color-actual color-siguiente)         ;requerimiento 1
+    (cond
+        ((and (equalp color-actual 'en-verde) (equalp color-siguiente 'amarillo)) (list color-actual "cambiar-a-amarillo"))
+        ((and (equalp color-actual 'en-amarillo) (equalp color-siguiente 'rojo)) (list color-actual "cambiar-a-rojo"))
+        ((and (equalp color-actual 'en-rojo) (equalp color-siguiente 'verde)) (list color-actual "cambiar-a-verde"))
+        (t (list color-actual "transicion-invalida"))
+        )
+    )
 ----------------------------------------------------------------------------------------------------------------------------------
 Requerimiento 2: Temporizador Automático
 ;; ========================================================
@@ -65,7 +68,7 @@ Requerimiento 3: Sistema de Auditoría
 
 (defun ciclosPorTiempo (minutos)       ;requerimient0 5
     (cond 
-        ((and (numberp minutos) (> minutos 0)) (format t "Cantidad de ciclos completos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216))))
+        ((and (numberp minutos) (> minutos 0)) (format nil "Cantidad de ciclos completos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216))))
         (t "Error: El parámetro debe ser un número positivo")))
 
 (defun distribucionTemp ()     ;requerimiento 6
