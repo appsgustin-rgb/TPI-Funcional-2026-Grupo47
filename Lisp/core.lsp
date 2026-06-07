@@ -1,9 +1,15 @@
-(defun transicion (color-actual color-siguiente)         ;requerimiento 1
-    (cond
-        ((and (equalp color-actual 'verde) (equalp color-siguiente 'amarillo)) (list color-actual "cambiar-a-amarillo"))
-        ((and (equalp color-actual 'amarillo) (equalp color-siguiente 'rojo)) (list color-actual "cambiar-a-rojo"))
-        ((and (equalp color-actual 'rojo) (equalp color-siguiente 'verde)) (list color-actual "cambiar-a-verde"))
-        (t nil)))
+Requerimiento 1: Estados de Transición
+;; ========================================================
+;; FUNCIÓN: transicion
+;; NATURALEZA: Pura (devuele el mismo resultado para los mismos argumentos de entrada)
+;; ESTRATEGIA: Funcion condicional (va a evaluar los valores de entrada según las condiciones establecidas)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ========================================================
+(defun transicion (color-actual cambiar-a)
+	(cond (	(eq cambiar-a 'verde)    (list color-actual "cambiar-a-verde"))
+	      ( (eq cambiar-a 'rojo)     (list color-actual "cambiar-a-rojo"))
+	      ( (eq cambiar-a 'amarillo) (list color-actual "cambiar-a-amarillo"))
+	      (t (list color-actual 'accion-por-defecto))))
 
 (defun posEnCiclo (momentoInicio momentoActual)        ;funcion auxiliar para calcular la posicion en el ciclo de luces          
         (mod (- momentoActual momentoInicio) 216)      ;siempre da entre 1 y 216, que es la duracion total del ciclo de luces
