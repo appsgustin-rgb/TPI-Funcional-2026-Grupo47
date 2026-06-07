@@ -71,6 +71,6 @@ Requerimiento 3: Sistema de Auditoría
     (format nil "Cantidad de ciclos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216)))
     )
 
-(defun distribucionTemp () ;requerimiento 6
-    (format t "verde: %~v, amarillo: %~a, rojo: %~r." (* (/ 120 3600) 100) (* (/ 6 3600) 100) (* (/ 90 3600) 100))
+(defun distribucionTemp ()     ;requerimiento 6
+    (format nil "verde: %~a, amarillo: %~a, rojo: %~a." (* (/ (* 120 16.6) 3600) 100) (* (/ (* 6 16.6) 3600) 100) (* (/ (* 90 16.6) 3600) 100))
     )
