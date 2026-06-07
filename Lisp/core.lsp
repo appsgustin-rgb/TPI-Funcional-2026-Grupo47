@@ -21,7 +21,7 @@ Requerimiento 2: Temporizador Automático
 (defun posEnCiclo (primerTimestamp timestampActual)                  
       (IF (AND (numberp primerTimestamp) (numberp timestampActual))
 		(mod (- timestampActual primerTimestamp) 216)
-		"Los datos ingresados son invalidos"))
+		nil))
 
 ;; ========================================================
 ;; FUNCIÓN: timer
