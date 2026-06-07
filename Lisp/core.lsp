@@ -52,17 +52,17 @@ Requerimiento 3: Sistema de Auditoría
         )
     )
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-(defun duracionCiclo (segVerde segAmarillo segRojo) ;requerimiento 4.a
+ (defun duracionCiclo (segVerde segAmarillo segRojo) ;requerimiento 4.a
     (cond
-        (and (numberp segVerde) (numberp segAmarillo) (numberp segRojo)) (format t "Duración del ciclo: ~a segundos" (+ segVerde segAmarillo segRojo))
-        (t "Error: Todos los parámetros deben ser números")
+        ((and (numberp segVerde) (numberp segAmarillo) (numberp segRojo)) (+ segVerde segAmarillo segRojo))
+        (t nil)
         )
     )
-
 (defun recomendacionCiclo (ciclo) ;requerimiento 4.b
     (cond 
+        ((null ciclo) "Error: El parámetro debe ser un número")
          ((and (< ciclo 150) (> ciclo 35)) "Duracion OPTIMA")
-         ((ciclo < 35) "Duracion NO OPTIMA aumentar duracion del ciclo")
+         ((< ciclo 35) "Duracion NO OPTIMA aumentar duracion del ciclo")
          (t "Duracion NO OPTIMA reducir duracion del ciclo")
         )
     )
