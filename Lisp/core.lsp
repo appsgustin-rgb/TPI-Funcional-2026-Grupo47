@@ -54,6 +54,7 @@ Requerimiento 3: Sistema de Auditoría
         (t (format nil "~Tiempo ~a: la luz a cambiado de verde a amarillo" timestampActual))))
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Requerimiento 4a: Funcion Duracion-Ciclo
 ;; ========================================================
 ;; FUNCIÓN: duracionCiclo
 ;; NATURALEZA: Pura (recibe valores numeros, realiza un calculo aritmetico y devuelve el resultado)
@@ -64,7 +65,8 @@ Requerimiento 3: Sistema de Auditoría
     (cond
         ((and (numberp segVerde) (numberp segAmarillo) (numberp segRojo)) (+ segVerde segAmarillo segRojo))
         (t nil)))
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Requerimiento 4b: Funcion Recomendacion-Ciclo
 ;; ========================================================
 ;; FUNCIÓN: recomendacionCiclo
 ;; NATURALEZA: Pura (recibe un valor de duracion de ciclo y retorna una cadena de texto evaluando las condiciones)
@@ -77,7 +79,8 @@ Requerimiento 3: Sistema de Auditoría
          ((and (< ciclo 150) (> ciclo 35)) "Duracion OPTIMA")
          ((< ciclo 35) "Duracion NO OPTIMA aumentar duracion del ciclo")
          (t "Duracion NO OPTIMA reducir duracion del ciclo")))
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Requerimiento 5: Planificacion Temporal
 ;; ========================================================
 ;; FUNCIÓN: ciclosPorTiempo
 ;; NATURALEZA: Pura (recibe un valor de tiempo en minutos y calcula la cantidad de ciclos enteros)
@@ -88,7 +91,8 @@ Requerimiento 3: Sistema de Auditoría
     (cond 
         ((and (numberp minutos) (> minutos 0)) (format nil "Cantidad de ciclos completos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216))))
         (t "Error: El parámetro debe ser un número positivo")))
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Requerimiento 6: Informe de Distribucion Temporal
 ;; ========================================================
 ;; FUNCIÓN: distribucionTemp
 ;; NATURALEZA: Pura (realiza calculos porcentuales de distribucion de tiempo fijos y devuelve el formato)
