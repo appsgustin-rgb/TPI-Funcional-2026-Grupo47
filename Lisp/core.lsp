@@ -5,14 +5,49 @@ Requerimiento 1: Estados de Transición
 ;; ESTRATEGIA: Funcion condicional (va a evaluar los valores de entrada según las condiciones establecidas)
 ;; IMPACTO: No destructiva (no modifica las variables originales)
 ;; ========================================================
-(defun transicion (color-actual color-siguiente)         ;requerimiento 1
-    (cond
-        ((and (equalp color-actual 'en-verde) (equalp color-siguiente 'amarillo)) (list color-actual "cambiar-a-amarillo"))
-        ((and (equalp color-actual 'en-amarillo) (equalp color-siguiente 'rojo)) (list color-actual "cambiar-a-rojo"))
-        ((and (equalp color-actual 'en-rojo) (equalp color-siguiente 'verde)) (list color-actual "cambiar-a-verde"))
-        (t (list color-actual "transicion-invalida"))
-        )
-    )
+(defun transicion (color-actual color-siguiente)
+  (cond
+    ((and (equalp color-actual 'en-verde)
+          (equalp color-siguiente 'amarillo))
+     (list color-actual "cambiar-a-verde-intermitente"))
+
+    ((and (equalp color-actual 'en-verde-intermitente)
+          (equalp color-siguiente 'amarillo))
+     (list color-actual "cambiar-a-amarillo"))
+
+    ((and (equalp color-actual 'en-amarillo)
+          (equalp color-siguiente 'rojo))
+     (list color-actual "cambiar-a-amarillo-intermitente"))
+
+    ((and (equalp color-actual 'en-amarillo-intermitente)
+          (equalp color-siguiente 'rojo))
+     (list color-actual "cambiar-a-rojo"))
+
+    ((and (equalp color-actual 'en-rojo)
+          (equalp color-siguiente 'verde))
+	(list color-actual "cambiar-a-rojo-intermitente"))
+
+    ((and (equalp color-actual 'en-rojo-intermitente)
+          (equalp color-siguiente 'verde))
+     (list color-actual "cambiar-a-verde"))
+
+    (t (list color-actual 'accion-por-defecto))))
+
+;; ============================================================
+;; ASEGURAMIENTO DE CALIDAD (Requerimiento 7)
+;; ============================================================
+;; -- Funcionamiento normal --
+;; (transicion 'en-rojo 'verde)
+;; => (EN-ROJO "cambiar-a-rojo-intermitente")
+
+;; -- Camino alternativo --
+;; (transicion 'en-verde 'rojo)
+;; => (EN-VERDE ACCION-POR-DEFECTO)
+
+;; -- Caso de error --
+;; (transicion 'en-azul 'verde)
+;; => (EN-AZUL ACCION-POR-DEFECTO)
+
 ----------------------------------------------------------------------------------------------------------------------------------
 Requerimiento 2: Temporizador Automático
 ;; ========================================================
