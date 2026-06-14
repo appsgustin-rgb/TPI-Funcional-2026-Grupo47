@@ -51,28 +51,40 @@ Requerimiento 1: Estados de Transición
 ----------------------------------------------------------------------------------------------------------------------------------
 Requerimiento 2: Temporizador Automático
 ;; ========================================================
-;; FUNCIÓN: posEnCiclo ;; Auxiliar
-;; NATURALEZA: Pura (recibe valores numeros y devuelve el mismo tipo)
-;; ESTRATEGIA: Posicion del timer dentro del intervalo de ciclo
-;; IMPACTO: No destructiva (no modifica las variables originales)
-;; ========================================================
-(defun posEnCiclo (timestampActual)                  
-      (IF (numberp timestampActual)              ;funcion auxiliar para calcular la posicion en el ciclo de 216 segundos
-		(mod (- timestampActual 1171810800) 216) ; 1171810800 es el timestamp del 18 de febrero de 2007 a las 12:00:00 PM GMT
-		nil))
-
-;; ========================================================
 ;; FUNCIÓN: timer
 ;; NATURALEZA: Pura (recibe valores numeros y devuelve el mismo tipo)
 ;; ESTRATEGIA: Funcion condicional (Segun sea la posicion en el ciclo, se determina el color actual de la luz)
 ;; IMPACTO: No destructiva (no modifica las variables originales)
 ;; ========================================================
-(defun timer (timestampActual)  ;requerimiento 2
-  (let ((pos (posEnCiclo timestampActual)))
-    (cond ((null pos) "error: solo numeros")
-		  ((< pos 90)  'rojo)      ; De 0 a 89 (90 segundos)
-          ((< pos 96)  'amarillo)  ; De 90 a 95 (6 segundos)
-          (t 'verde))))            ; De 96 a 215 (120 segundos)
+(defun timer (timestamp-actual)
+  (if (not (numberp timestamp-actual))
+      "error: solo numeros"
+      (let ((pos (mod (- timestamp-actual 1171810800) 225)))
+        (cond
+          ((< pos  90) 'rojo)
+          ((< pos  93) 'rojo-intermitente)
+          ((< pos  99) 'amarillo)
+          ((< pos 102) 'amarillo-intermitente)
+          ((< pos 222) 'verde)
+          (t           'verde-intermitente)))))
+
+;; ============================================================
+;; ASEGURAMIENTO DE CALIDAD (Requerimiento 7)
+;; ============================================================
+
+;; -- Funcionamiento normal --
+;; (timer 1171810800)   
+;; > ROJO
+;; (timer 1171810845)   
+;; > ROJO
+
+;; -- Camino alternativo --
+;; (timer 1171811025)   
+;; > ROJO
+
+;; -- Caso de error --
+;; (timer "hoy")
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 Requerimiento 3: Sistema de Auditoría
