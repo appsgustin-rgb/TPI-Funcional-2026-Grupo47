@@ -1,4 +1,53 @@
-Requerimiento 1: Estados de Transición
+;; ============================================================
+;; SISTEMA DE SEMÁFOROS INTELIGENTES - Common Lisp
+;; Trabajo Práctico Integrador 2026
+;; ============================================================
+
+;; Carga de la librería local-time
+(ql:quickload "local-time" :silent t)
+;; ------------------- FUNCIONES AUXILIARES -------------------
+;; ============================================================
+;; FUNCIÓN: unix-a-timestamp
+;; NATURALEZA: Pura (misma entrada siempre produce la misma salida)
+;; ESTRATEGIA: Función de Orden Superior (delegación a local-time:unix-to-timestamp)
+;; IMPACTO: No destructiva
+;; ============================================================
+(defun unix-a-timestamp (unix-ts)
+  (local-time:unix-to-timestamp unix-ts))
+
+;; ============================================================
+;; FUNCIÓN: timestamp-a-string
+;; NATURALEZA: Pura (misma entrada siempre produce la misma salida)
+;; ESTRATEGIA: Función de Orden Superior (delegación a local-time:format-timestring)
+;; IMPACTO: No destructiva
+;; ============================================================
+(defun timestamp-a-string (unix-ts)
+  (local-time:format-timestring
+    nil
+    (unix-a-timestamp unix-ts)
+    :format '("[" (:year 4) "-" (:month 2) "-" (:day 2)
+              " " (:hour 2) ":" (:min 2) ":" (:sec 2) "]")
+    :timezone local-time:+utc-zone+))
+
+;; ============================================================
+;; FUNCIÓN: estado-a-texto
+;; NATURALEZA: Pura (misma entrada siempre produce la misma salida)
+;; ESTRATEGIA: Función Predicado / Condicional (evalúa símbolo y devuelve string legible)
+;; IMPACTO: No destructiva
+;; ============================================================
+(defun estado-a-texto (estado)
+  (cond
+    ((equalp estado 'rojo)                  "ROJO")
+    ((equalp estado 'rojo-intermitente)     "ROJO-INTERMITENTE")
+    ((equalp estado 'amarillo)              "AMARILLO")
+    ((equalp estado 'amarillo-intermitente) "AMARILLO-INTERMITENTE")
+    ((equalp estado 'verde)                 "VERDE")
+    ((equalp estado 'verde-intermitente)    "VERDE-INTERMITENTE")
+    (t                                      "DESCONOCIDO")))
+
+;; ----------------- FUNCIONES PRINCIPALES --------------------
+;; ========================================================
+;; REQUERIMIENTO 1: TRANCISION
 ;; ========================================================
 ;; FUNCIÓN: transicion
 ;; NATURALEZA: Pura (devuele el mismo resultado para los mismos argumentos de entrada)
@@ -48,8 +97,8 @@ Requerimiento 1: Estados de Transición
 ;; (transicion 'en-azul 'verde)
 ;; => (EN-AZUL ACCION-POR-DEFECTO)
 
-----------------------------------------------------------------------------------------------------------------------------------
-Requerimiento 2: Temporizador Automático
+;; ========================================================
+;; REQUERIMIENTO 2: TIMER
 ;; ========================================================
 ;; FUNCIÓN: timer
 ;; NATURALEZA: Pura (recibe valores numeros y devuelve el mismo tipo)
@@ -86,7 +135,6 @@ Requerimiento 2: Temporizador Automático
 ;; (timer "hoy")
 
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;; ============================================================
 ;; REQUERIMIENTO 3: SISTEMA DE AUDITORÍA
 ;; ============================================================
@@ -116,7 +164,7 @@ Requerimiento 2: Temporizador Automático
 ;; -- Caso de error --
 ;; (auditoria 'azul 'rojo 1171810800)
 ;; > "Tiempo [2007-02-19 03:00:00]: la luz ha cambiado de DESCONOCIDO a ROJO"
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ;; ============================================================
 ;; REQUERIMIENTO 4A: DURACIÓN DE CICLO
 ;; ============================================================
@@ -146,7 +194,7 @@ Requerimiento 2: Temporizador Automático
 ;; -- Caso de error --
 ;; (duracion-ciclo 120 6 "noventa" 3) 
 ;;> NIL
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ;; ============================================================
 ;; REQUERIMIENTO 4B: RECOMENDACIÓN DE CICLO
 ;; ============================================================
@@ -177,7 +225,7 @@ Requerimiento 2: Temporizador Automático
 ;; -- Caso de error --
 ;; (recomendacion-ciclo nil)    
 ;;> "Error: El parametro debe ser un numero"
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ;; ============================================================
 ;; REQUERIMIENTO 5: PLANIFICACIÓN TEMPORAL
 ;; ============================================================
@@ -209,7 +257,6 @@ Requerimiento 2: Temporizador Automático
 ;; (ciclos-por-tiempo -5)        
 ;;> "Error: El parametro debe ser un numero positivo"
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ;; ============================================================
 ;; REQUERIMIENTO 6: INFORME DE DISTRIBUCIÓN TEMPORAL
 ;; ============================================================
