@@ -59,13 +59,13 @@ Requerimiento 2: Temporizador Automático
 (defun timer (timestamp-actual)
   (if (not (numberp timestamp-actual))
       "error: solo numeros"
-      (let ((pos (mod (- timestamp-actual 1171810800) 216)))
+      (let ((pos (mod (- timestamp-actual 1171810800) 225)))
         (cond
           ((< pos  90) 'rojo)
           ((< pos  93) 'rojo-intermitente)
           ((< pos  99) 'amarillo)
           ((< pos 102) 'amarillo-intermitente)
-          ((< pos 213) 'verde)
+          ((< pos 222) 'verde)
           (t           'verde-intermitente)))))
 
 ;; ============================================================
