@@ -87,64 +87,209 @@ Requerimiento 2: Temporizador Automático
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-Requerimiento 3: Sistema de Auditoría
-;; =========================================================
-;; FUNCIÓN: auditoria 
-;; NATURALEZA: Pura (no produce efectos secundarios en la pantalla ya que construye y retorna una cadena de texto)
-;; ESTRATEGIA: Función condicional (utiliza un cond para evaluar el color de destino mediante comparaciones con equalp)
-;; IMPACTO: No destructiva (no altera ni modifica los símbolos o valores recibidos por los argumentos)
-;; ===========================================================
-(defun auditoria (colorActual timestampActual)      ;requerimiento 3
-    (cond
-        ((equalp colorActual 'rojo) (format nil "~Tiempo ~a: la luz ha cambiado de amarillo a rojo" timestampActual))
-        ((equalp colorActual 'verde) (format nil "~Tiempo ~a: la luz ha cambiado de rojo a verde" timestampActual))
-        (t (format nil "~Tiempo ~a: la luz a cambiado de verde a amarillo" timestampActual))))
+;; ============================================================
+;; REQUERIMIENTO 3: SISTEMA DE AUDITORÍA
+;; ============================================================
+;; FUNCIÓN: auditoria
+;; NATURALEZA: Impura (imprime en terminal)
+;; ESTRATEGIA: Función Condicional (usa format t para salida directa a terminal)
+;; IMPACTO: No destructiva (no altera ni modifica los argumentos recibidos)
+;; ============================================================ 
+(defun auditoria (color-anterior color-nuevo timestamp-actual)
+  (let ((fecha (timestamp-a-string timestamp-actual)))
+    (format t "Tiempo ~a: la luz ha cambiado de ~a a ~a~%"
+            fecha
+            (estado-a-texto color-anterior)
+            (estado-a-texto color-nuevo)))) 
+;; ============================================================
+;; REQUERIMIENTO 3 - ASEGURAMIENTO DE CALIDAD (Requerimiento 7)
+;; ============================================================
+
+;; -- Funcionamiento normal --
+;; (auditoria 'rojo 'rojo-intermitente 1171810890)
+;; > "Tiempo [2007-02-19 03:01:30]: la luz ha cambiado de ROJO a ROJO-INTERMITENTE"
+
+;; -- Camino alternativo --
+;; (auditoria (timer 1171810800) (timer 1171810890) 1171810890)
+;; > "Tiempo [2007-02-19 03:01:30]: la luz ha cambiado de ROJO a ROJO-INTERMITENTE"
+
+;; -- Caso de error --
+;; (auditoria 'azul 'rojo 1171810800)
+;; > "Tiempo [2007-02-19 03:00:00]: la luz ha cambiado de DESCONOCIDO a ROJO"
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;; ============================================================
+;; REQUERIMIENTO 4A: DURACIÓN DE CICLO
+;; ============================================================
+;; FUNCIÓN: duracion-ciclo
+;; NATURALEZA: Pura (recibe valores numéricos, realiza cálculo aritmético y devuelve el resultado)
+;; ESTRATEGIA: Función Condicional (valida los tipos de entrada antes de la operación aritmética)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ============================================================ 
+
+(defun duracion-ciclo (seg-verde seg-amarillo seg-rojo seg-intermitencia)
+  (cond
+    ((and (numberp seg-verde) (numberp seg-amarillo)
+          (numberp seg-rojo)  (numberp seg-intermitencia))
+     (+ seg-verde seg-amarillo seg-rojo (* 3 seg-intermitencia)))
+    (t nil)))
+
+;; ============================================================
+;; REQUERIMIENTO 4A - ASEGURAMIENTO DE CALIDAD (Requerimiento 7)
+;; ============================================================
+
+;; -- Funcionamiento normal --
+;; (duracion-ciclo 120 6 90 3)
+;;> 225
+;; -- Camino alternativo --
+;; (duracion-ciclo 60 6 90 3)    
+;;> 165
+;; -- Caso de error --
+;; (duracion-ciclo 120 6 "noventa" 3) 
+;;> NIL
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;; ============================================================
+;; REQUERIMIENTO 4B: RECOMENDACIÓN DE CICLO
+;; ============================================================
+;; FUNCIÓN: recomendacion-ciclo
+;; NATURALEZA: Pura (recibe un valor de duración y retorna una cadena de texto sin efectos secundarios)
+;; ESTRATEGIA: Función Predicado / Condicional (evalúa el rango numérico del ciclo)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ============================================================ 
+(defun recomendacion-ciclo (ciclo)
+  (cond
+    ((null ciclo)    "Error: El parametro debe ser un numero")
+    ((< ciclo 35)    "Duracion NO OPTIMA - aumentar duracion del ciclo")
+    ((<= ciclo 150)  "Duracion OPTIMA")
+    (t               "Duracion NO OPTIMA - reducir duracion del ciclo")))
+
+;; ============================================================
+;; REQUERIMIENTO 4B - ASEGURAMIENTO DE CALIDAD (Requerimiento 7)
+;; ============================================================
+
+;; -- Funcionamiento normal (rango óptimo: 35 a 150 segundos) --
+;; (recomendacion-ciclo 35)     
+;;> "Duracion OPTIMA"
+
+;; -- Camino alternativo --
+;; (recomendacion-ciclo 20)     
+;;> "Duracion NO OPTIMA - aumentar duracion del ciclo"
+
+;; -- Caso de error --
+;; (recomendacion-ciclo nil)    
+;;> "Error: El parametro debe ser un numero"
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+;; ============================================================
+;; REQUERIMIENTO 5: PLANIFICACIÓN TEMPORAL
+;; ============================================================
+;; FUNCIÓN: ciclos-por-tiempo
+;; NATURALEZA: Pura (recibe un valor en minutos y calcula la cantidad de ciclos enteros)
+;; ESTRATEGIA: Función Aritmética (aplica división y truncamiento sobre el resultado de duracion-ciclo)
+;; IMPACTO: No destructiva (no modifica las variables originales)
+;; ============================================================ 
+
+(defun ciclos-por-tiempo (minutos)
+  (if (and (numberp minutos) (>= minutos 0))
+      (let ((duracion (duracion-ciclo 120 6 90 3)))
+        (format nil "Cantidad de ciclos completos en ~a minutos: ~a"
+                minutos
+                (truncate (/ (* minutos 60) duracion))))
+      "Error: El parametro debe ser un numero positivo")) 
+;; ============================================================
+;; REQUERIMIENTO 5 - ASEGURAMIENTO DE CALIDAD (Requerimiento 7)
+;; ============================================================
+
+;; -- Funcionamiento normal --
+;; (ciclos-por-tiempo 15)   
+;;> "Cantidad de ciclos completos en 15 minutos: 4"
+
+;; -- Camino alternativo --
+;; (ciclos-por-tiempo 0)    => "Cantidad de ciclos completos en 0 minutos: 0"
+;;
+;; -- Caso de error --
+;; (ciclos-por-tiempo -5)        
+;;> "Error: El parametro debe ser un numero positivo"
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Requerimiento 4a: Funcion Duracion-Ciclo
-;; ========================================================
-;; FUNCIÓN: duracionCiclo
-;; NATURALEZA: Pura (recibe valores numeros, realiza un calculo aritmetico y devuelve el resultado)
-;; ESTRATEGIA: Funcion condicional (Segun sea el tipo de dato recibido, se valida y realiza una operacion aritmetica)
-;; IMPACTO: No destructiva (no modifica las variables originales)
-;; ======================================================== 
-(defun duracionCiclo (segVerde segAmarillo segRojo) ;requerimiento 4.a
-    (cond
-        ((and (numberp segVerde) (numberp segAmarillo) (numberp segRojo)) (+ segVerde segAmarillo segRojo))
-        (t nil)))
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Requerimiento 4b: Funcion Recomendacion-Ciclo
-;; ========================================================
-;; FUNCIÓN: recomendacionCiclo
-;; NATURALEZA: Pura (recibe un valor de duracion de ciclo y retorna una cadena de texto evaluando las condiciones)
-;; ESTRATEGIA: Funcion condicional (Evalua el rango numérico del ciclo para sugerir optimizaciones)
-;; IMPACTO: No destructiva (no modifica las variables originales)
-;; ========================================================
-(defun recomendacionCiclo (ciclo) ;requerimiento 4.b
-    (cond 
-        ((null ciclo) "Error: El parámetro debe ser un número")
-         ((and (<= ciclo 150) (>= ciclo 35)) "Duracion OPTIMA")
-         ((< ciclo 35) "Duracion NO OPTIMA aumentar duracion del ciclo")
-         (t "Duracion NO OPTIMA reducir duracion del ciclo")))
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Requerimiento 5: Planificacion Temporal
-;; ========================================================
-;; FUNCIÓN: ciclosPorTiempo
-;; NATURALEZA: Pura (recibe un valor de tiempo en minutos y calcula la cantidad de ciclos enteros)
-;; ESTRATEGIA: Funcion aritmetica (Aplica division y truncamiento para retornar una cadena con format)
-;; IMPACTO: No destructiva (no modifica las variables originales)
-;; ========================================================
-(defun ciclosPorTiempo (minutos)       ;requerimient0 5
-    (cond 
-        ((and (numberp minutos) (> minutos 0)) (format nil "Cantidad de ciclos completos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 225))))
-        (t "Error: El parámetro debe ser un número positivo")))
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Requerimiento 6: Informe de Distribucion Temporal
-;; ========================================================
-;; FUNCIÓN: distribucionTemp
-;; NATURALEZA: Pura (realiza calculos porcentuales de distribucion de tiempo fijos y devuelve el formato)
-;; ESTRATEGIA: Funcion aritmetica (Calcula relaciones matematicas basadas en tiempos predeterminados)
-;; IMPACTO: No destructiva (no modifica las variables originales)
-;; ========================================================
-(defun distribucionTemp ()     ;requerimiento 6
-    (format nil "verde: %~a, amarillo: %~a, rojo: %~a." (* (/ (* 120 16.6) 3600) 100) (* (/ (* 6 16.6) 3600) 100) (* (/ (* 90 16.6) 3600) 100)))
+;; ============================================================
+;; REQUERIMIENTO 6: INFORME DE DISTRIBUCIÓN TEMPORAL
+;; ============================================================
+;; FUNCIÓN: distribucion-temp
+;; NATURALEZA: Pura (realiza cálculos porcentuales y devuelve el formato sin efectos secundarios)
+;; ESTRATEGIA: Función de Orden Superior (usa lambda como función auxiliar interna via funcall)
+;; IMPACTO: No destructiva (no modifica variables originales)
+;; ============================================================ 
+(defun distribucion-temp ()
+  (let* ((total (duracion-ciclo 120 6 90 3))
+         (pct   (lambda (s) (float (* (/ s total) 100)))))
+    (format nil
+      "verde: ~,1f%, verde-intermitente: ~,1f%, amarillo: ~,1f%, amarillo-intermitente: ~,1f%, rojo: ~,1f%, rojo-intermitente: ~,1f%."
+      (funcall pct 120) (funcall pct 3)
+      (funcall pct 6)   (funcall pct 3)
+      (funcall pct 90)  (funcall pct 3))))
+;; ============================================================
+;; REQUERIMIENTO 6 - ASEGURAMIENTO DE CALIDAD (Requerimiento 7)
+;; ============================================================
+
+;; -- Funcionamiento normal --
+;; (distribucion-temp)
+;; > "verde: 53.3%, verde-intermitente: 1.3%, amarillo: 2.7%, amarillo-intermitente: 1.3%, rojo: 40.0%, rojo-intermitente: 1.3%."
+
+;; ============================================================
+;; EXTENSIÓN 2: PERSISTENCIA DE DATOS
+;; ============================================================
+;; FUNCIÓN: escribir-entradas  (función auxiliar de informe)
+;; NATURALEZA: Impura (escribe en archivo)
+;; ESTRATEGIA: Recursiva de Cola (procesa la lista sin acumular pila)
+;; IMPACTO: No destructiva (no modifica la lista de datos de entrada)
+;; ============================================================ 
+
+(defun escribir-entradas (stream datos)
+  (when datos
+    (let* ((entrada  (first datos))
+           (fecha    (first  entrada))
+           (estado   (second entrada))
+           (mensaje  (third  entrada)))
+      (format stream "~21a | ~20a | ~a~%"
+              fecha
+              (estado-a-texto estado)
+              mensaje)
+      (escribir-entradas stream (rest datos)))))
+;; ============================================================
+;; FUNCIÓN: informe
+;; NATURALEZA: Impura (escribe en archivo)
+;; ESTRATEGIA: Recursiva de Cola (delega la iteración a escribir-entradas)
+;; IMPACTO: No destructiva (no modifica los datos de entrada)
+;; ============================================================
+(defun informe (datos)
+  (with-open-file (stream "informe-ejecucion-semaforo.txt"
+                          :direction :output
+                          :if-exists :supersede
+                          :if-does-not-exist :create)
+    (format stream "Informe de Ejecucion del Sistema Semaforico~%")
+    (format stream "==========================================~%")
+    (format stream "~21a | ~20a | ~a~%" "FECHA/HORA" "ESTADO" "DESCRIPCION")
+    (format stream "~a~%" "---------------------+----------------------+-------------------------------")
+    (escribir-entradas stream datos)
+    (format stream "~%--- Fin del Informe ---~%")))
+
+;; ============================================================
+;; EXTENSIÓN 2 - ASEGURAMIENTO DE CALIDAD (Requerimiento 7)
+;; ============================================================
+
+;; -- Funcionamiento normal --
+;; (informe
+;;   (list
+;;     (list "[2007-02-19 03:00:00]" 'rojo               "Estado inicial del sistema")
+;;     (list "[2007-02-19 03:01:30]" 'rojo-intermitente  "Entrando en intermitencia")
+;;     (list "[2007-02-19 03:01:33]" 'amarillo            "Transicion a AMARILLO")
+;;     (list "[2007-02-19 03:01:39]" 'amarillo-intermitente "Entrando en intermitencia")
+;;     (list "[2007-02-19 03:01:42]" 'verde               "Transicion a VERDE")))
+;; > crea "informe-ejecucion-semaforo.txt" con las entradas formateadas en tabla
+;;
+;; -- Camino alternativo  --
+;; (informe (list))
+;; > crea el archivo con encabezado y pie, sin entradas de datos
+;;
+;; -- Caso de error --
+;; (informe (list (list "[2007-02-19 03:00:00]" 'azul "Estado inexistente")))
+;; > escribe "DESCONOCIDO" en la columna ESTADO sin lanzar error
