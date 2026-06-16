@@ -4,7 +4,7 @@
 ;; ============================================================
 
 ;; Carga de la librería local-time
-(ql:quickload "local-time" :silent t)
+(ql:quickload "local-time")
 ;; ------------------- FUNCIONES AUXILIARES -------------------
 ;; ============================================================
 ;; FUNCIÓN: unix-a-timestamp
