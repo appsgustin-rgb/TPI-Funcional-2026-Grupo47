@@ -4,7 +4,10 @@
 ;; ============================================================
 
 ;; Carga de la librería local-time
-(ql:quickload "local-time")
+ (load "ruta/de/quicklisp.lisp")
+ (quicklisp-quickstart:install)
+ (ql:add-to-init-file)
+ (ql:quickload "local-time")
 ;; ------------------- FUNCIONES AUXILIARES -------------------
 ;; ============================================================
 ;; FUNCIÓN: unix-a-timestamp
