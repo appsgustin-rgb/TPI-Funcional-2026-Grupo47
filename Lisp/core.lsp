@@ -136,7 +136,7 @@ Requerimiento 5: Planificacion Temporal
 ;; ========================================================
 (defun ciclosPorTiempo (minutos)       ;requerimient0 5
     (cond 
-        ((and (numberp minutos) (> minutos 0)) (format nil "Cantidad de ciclos completos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 216))))
+        ((and (numberp minutos) (> minutos 0)) (format nil "Cantidad de ciclos completos en ~a minutos: ~a" minutos (truncate (/ (* minutos 60) 225))))
         (t "Error: El parámetro debe ser un número positivo")))
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Requerimiento 6: Informe de Distribucion Temporal
