@@ -13,7 +13,7 @@ Implementación funcional en Common Lisp de un sistema de control de tráfico ur
 | Romero Agustin Ezequiel | appsgustin |
 | Salguero Benjamin | usuario2 |
 | Roa Gabriel Alan | usuario3 |
-| Retamoso Lisandro | usuario4 |
+| Retamoso Lisandro | agustinSinH |
 
 ## 📁 Estructura del repositorio
 ``` bash
