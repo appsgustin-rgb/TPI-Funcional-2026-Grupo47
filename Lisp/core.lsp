@@ -59,13 +59,13 @@ Requerimiento 2: Temporizador Automático
 (defun timer (timestamp-actual)
   (if (not (numberp timestamp-actual))
       "error: solo numeros"
-      (let ((pos (mod (- timestamp-actual 1171810800) 225)))
+      (let ((pos (mod (- timestamp-actual 1171810800) 216)))
         (cond
           ((< pos  90) 'rojo)
           ((< pos  93) 'rojo-intermitente)
           ((< pos  99) 'amarillo)
           ((< pos 102) 'amarillo-intermitente)
-          ((< pos 222) 'verde)
+          ((< pos 213) 'verde)
           (t           'verde-intermitente)))))
 
 ;; ============================================================
@@ -96,8 +96,8 @@ Requerimiento 3: Sistema de Auditoría
 ;; ===========================================================
 (defun auditoria (colorActual timestampActual)      ;requerimiento 3
     (cond
-        ((equalp colorActual 'rojo) (format nil "~Tiempo ~a: la luz a cambiado de amarillo a rojo" timestampActual))
-        ((equalp colorActual 'verde) (format nil "~Tiempo ~a: la luz a cambiado de rojo a verde" timestampActual))
+        ((equalp colorActual 'rojo) (format nil "~Tiempo ~a: la luz ha cambiado de amarillo a rojo" timestampActual))
+        ((equalp colorActual 'verde) (format nil "~Tiempo ~a: la luz ha cambiado de rojo a verde" timestampActual))
         (t (format nil "~Tiempo ~a: la luz a cambiado de verde a amarillo" timestampActual))))
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ Requerimiento 4b: Funcion Recomendacion-Ciclo
 (defun recomendacionCiclo (ciclo) ;requerimiento 4.b
     (cond 
         ((null ciclo) "Error: El parámetro debe ser un número")
-         ((and (< ciclo 150) (> ciclo 35)) "Duracion OPTIMA")
+         ((and (<= ciclo 150) (>= ciclo 35)) "Duracion OPTIMA")
          ((< ciclo 35) "Duracion NO OPTIMA aumentar duracion del ciclo")
          (t "Duracion NO OPTIMA reducir duracion del ciclo")))
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
