@@ -11,7 +11,7 @@ Implementación funcional en Common Lisp de un sistema de control de tráfico ur
 | Nombre | Usuario GitHub |
 |--------|----------------|
 | Romero Agustin Ezequiel | appsgustin |
-| Salguero Benjamin | usuario2 |
+| Salguero Benjamin | benjagonza0 |
 | Roa Gabriel Alan | usuario3 |
 | Retamoso Lisandro | agustinSinH |
 
