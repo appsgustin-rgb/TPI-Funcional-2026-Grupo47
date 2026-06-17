@@ -1,3 +1,4 @@
+<img width="1406" height="688" alt="WhatsApp Image 2026-06-16 at 22 12 47" src="https://github.com/user-attachments/assets/9c8f2fd9-2bd5-4886-9918-d9b79869fde8" />
 # TPI-Funcional-2026-Grupo[Numero]
 
 > Sistema de Semáforos Inteligentes – Trabajo Práctico Integrador 2026
