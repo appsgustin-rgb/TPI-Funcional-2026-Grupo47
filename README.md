@@ -32,7 +32,7 @@ TPI-Funcional-2026-Grupo47/
 ## ⚙️ Requisitos previos
 
 - Common Lisp
-- Quicklisp (para Fase 2)
+- Quicklisp (Fase 2)
 - Scheme (Fase 3)
 
 ## ▶️ Ejecución
