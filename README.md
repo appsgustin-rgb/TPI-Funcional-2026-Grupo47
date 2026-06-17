@@ -19,13 +19,12 @@ Implementación funcional en Common Lisp de un sistema de control de tráfico ur
 ``` bash
 TPI-Funcional-2026-Grupo47/
 ├── lisp/
-│ ├── core.lisp # Código Requerimientos 1 a 6 + extensiones
-│ └── config.json # Configuración de tiempos (si aplica)
+│ ├── core.lisp
 ├── comparativa/
-│ └── solucion.scm # Código en SCHEME
+│ └── solucion.scm
 ├── docs/ 
-│ ├── INFORME.pdf # Informe técnico analítico
-│ └── HONOR.md # Declaración de código de honor
+│ ├── INFORME.pdf
+│ └── HONOR.md
 └── README.md
 ```
 ## ⚙️ Requisitos previos
@@ -45,7 +44,7 @@ sbcl --load lisp/core.lisp
 (timer 1728000000)
 ```
 ## 🎥 Video de defensa
-🚧En proceso🚧
+https://youtu.be/0RsPTJkeJ98?si=mRSaZIztPCLsljjr
 
 ## 📄 Documentación
 Informe técnico completo: docs/INFORME.pdf
@@ -74,14 +73,12 @@ Extensión 1 – Intermitencia de seguridad (3s)
 
 Extensión 2 – Persistencia de loggin en archivo
 
-Fase 2 – Quicklisp + [local-time / cl-json]
+Fase 2 – Quicklisp + [local-time]
 
 Fase 3 – Implementación en Scheme
 
 ### 🔍 Notas para el corrector
 El código cumple con inmutabilidad absoluta (sin setq/setf/defparameter).
-
-No se utilizan bucles imperativos (loop, dolist); se emplea recursividad de cola y funciones de orden superior.
 
 Cada función incluye comentario de clasificación taxonómica (Naturaleza + Estrategia de control).
 
