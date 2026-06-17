@@ -1,6 +1,8 @@
 # TPI-Funcional-2026-Grupo[Numero]
 
 > Sistema de Semáforos Inteligentes – Trabajo Práctico Integrador 2026
+# 🎥 Video de defensa
+https://youtu.be/0RsPTJkeJ98?si=mRSaZIztPCLsljjr
 
 ## 📌 Descripción
 
@@ -43,8 +45,6 @@ sbcl --load lisp/core.lisp
 (transicion 'en-rojo 'verde)
 (timer 1728000000)
 ```
-## 🎥 Video de defensa
-https://youtu.be/0RsPTJkeJ98?si=mRSaZIztPCLsljjr
 
 ## 📄 Documentación
 Informe técnico completo: docs/INFORME.pdf
