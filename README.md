@@ -37,19 +37,8 @@ TPI-Funcional-2026-Grupo47/
 - Quicklisp (Fase 2)
 - Scheme (Fase 3)
 
-## ▶️ Ejecución
-
-```bash
-# Cargar el sistema
-sbcl --load lisp/core.lisp
-
-# Ejemplos de uso (dentro del REPL)
-(transicion 'en-rojo 'verde)
-(timer 1728000000)
-```
-
 ## 📄 Documentación
-Informe técnico completo: docs/INFORME.pdf
+Informe técnico completo: docs/INFORME.md
 
 Declaración de honor: docs/HONOR.md
 
